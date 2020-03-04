@@ -1,0 +1,31 @@
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: customer
+spec:
+  template:
+    metadata:
+      name: customer-v4
+    spec:
+      containers:
+        - image: quay.io/dsanchor/customer:quarkus
+          env:
+            - name: VERSION
+              value: "v4"
+          volumeMounts:
+            - name: configuration
+              mountPath: /deployments/config
+      volumes:
+        - name: configuration
+          configMap:
+            name: customer
+  traffic:
+  - tag: current
+    revisionName: customer-v3
+    percent: 50
+  - tag: candidate
+    revisionName: customer-v4
+    percent: 50
+  - tag: latest
+    latestRevision: true
+    percent: 0

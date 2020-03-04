@@ -1,0 +1,16 @@
+name: Quarkus Intro - Serving and Eventing
+
+modules:
+    activate:
+    - workshop-overview
+    - setup-environment
+    - exercises/01-generate-sample-service
+    - exercises/02-test-sample-service
+    - exercises/03-development-mode
+    - exercises/04-adding-database
+    - exercises/05-adding-swagger
+    - exercises/06-adding-health-checks
+    - exercises/07-working-on-che
+    - exercises/08-deploying-on-openshift-with-s2i
+    - exercises/09-cicd-with-tekton
+    - workshop-summary

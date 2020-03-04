@@ -1,0 +1,50 @@
+config:
+    vars:
+    - name: userid
+      value: undefined
+      aliases:
+      - USERID
+    - name: ocp_username
+      value: undefined
+      aliases:
+      - OCP_USERNAME
+    - name: ocp_password
+      value: undefined
+      aliases:
+      - OCP_PASSWORD
+    - name: KUBERNETES_SERVICE_HOST
+      value: undefined
+    - name: KUBERNETES_SERVICE_PORT
+      value: undefined
+
+modules:
+    workshop-overview:
+        name: Workshop Overview
+        exit_sign: Setup Environment
+    setup-environment:
+        name: Setup Environment
+        exit_sign: Start Workshop
+
+    exercises/01-generate-sample-service:
+        name: Generate Sample Service
+    exercises/02-test-sample-service:
+        name: Testing the Sample Service
+    exercises/03-development-mode:
+        name: Development Mode ON
+    exercises/04-adding-database:
+        name: Adding a Database to the mix
+    exercises/05-adding-swagger:
+        name: Adding Swagger capabilities
+    exercises/06-adding-health-checks:
+        name: Adding Health Checks
+    exercises/07-working-on-che:
+        name: Developing On Code Ready Workspaces
+    exercises/08-deploying-on-openshift-with-s2i:
+        name: Deploying on OpenShift with S2I
+    exercises/09-cicd-with-tekton:
+        name: CICD with Tekton Pipelines
+    workshop-summary:
+        name: Workshop Summary
+        exit_sign: Finish Workshop
+
+        

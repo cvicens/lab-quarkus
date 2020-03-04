@@ -1,0 +1,34 @@
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: customer
+spec:
+  template:
+    metadata:
+      name: customer-v3
+      annotations:
+        # Standard Kubernetes CPU-based autoscaling.
+        autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        autoscaling.knative.dev/metric: cpu
+        autoscaling.knative.dev/target: "45"
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+    spec:
+      containers:
+        - image: quay.io/dsanchor/customer:quarkus
+          env:
+            - name: VERSION
+              value: "v3"
+          volumeMounts:
+            - name: configuration
+              mountPath: /deployments/config
+          livenessProbe:
+            httpGet:
+              path: /health
+          readinessProbe:
+            httpGet:
+              path: /health
+      volumes:
+        - name: configuration
+          configMap:
+            name: customer

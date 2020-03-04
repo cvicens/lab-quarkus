@@ -1,0 +1,7 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KnativeEventingKafka
+metadata:
+  name: knative-demo-eventing-kafka
+spec:
+  bootstrapServers: knative-demo-kafka-bootstrap.kafka:9092
+  setAsDefaultChannelProvisioner: yes

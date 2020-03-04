@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: customer
+spec:
+  template:
+    metadata:
+      name: customer-v2
+      annotations:
+        # Target 10 in-flight-requests per pod.
+        autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+    spec:
+      containers:
+        - image: quay.io/dsanchor/customer:quarkus
+          env:
+            - name: VERSION
+              value: "v2"
+          volumeMounts:
+            - name: configuration
+              mountPath: /deployments/config
+      volumes:
+        - name: configuration
+          configMap:
+            name: customer

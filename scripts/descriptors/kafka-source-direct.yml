@@ -1,0 +1,12 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: KafkaSource
+metadata:
+  name: kafka-source
+spec:
+  consumerGroup: knative-group
+  bootstrapServers: knative-demo-kafka-bootstrap.kafka:9092 #note the kafka namespace
+  topics: eventing
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: logevents

@@ -1,0 +1,6 @@
+.kube
+.config
+.bash_history
+*.swp
+*.old
+old/*

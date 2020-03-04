@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1alpha1 
+kind: Service
+metadata:
+  name: logevents-all
+spec:
+  template:
+    spec:
+      containers:
+      - image: docker.io/matzew/event-display 
+---
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: demo-trigger-all
+spec:
+  broker: default	
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: logevents-all

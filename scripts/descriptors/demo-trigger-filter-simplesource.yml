@@ -1,0 +1,15 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: demo-trigger
+spec:
+  broker: default
+  filter:
+    attributes:
+       type: dev.knative.demo
+       source: dev.knative.demo/simplesource
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: logevents
